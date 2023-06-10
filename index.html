@@ -29,3 +29,200 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>Kashumy Github Pages</title>
+
+  <link rel="icon" type="image/x-icon" href="favico.ico">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+ <meta http-equiv="X-UA-Compatible" content="IE=7">
+
+    <meta name="keywords" content="Kashumy Portfolio">
+
+      <meta name="author" content="Krystian Popiolek">
+
+    <meta name="description" content="Moje Pojekty Strony itp. są Tutaj ">
+
+<style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    .navbar {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      background-color: #f1f1f1;
+
+      padding: 10px;
+
+    }
+
+    .navbar ul {
+
+      list-style: none;
+
+      display: flex;
+
+    }
+
+    .navbar ul li {
+
+      margin: 0 10px;
+
+      cursor: pointer;
+
+    }
+
+    .content {
+
+      display: none;
+
+      padding: 20px;
+
+    }
+
+    
+
+  </style>
+
+  <script>
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+
+      const navbarItems = document.querySelectorAll('.navbar li');
+
+      const contentSections = document.querySelectorAll('.content');
+
+contentSections[2].style.display = 'block';
+
+      navbarItems.forEach((item, index) => {
+
+        item.addEventListener('click', () => {
+
+          contentSections.forEach((section) => {
+
+            section.style.display = 'none';
+
+          });
+
+          contentSections[index].style.display = 'block';
+
+        });
+
+      });
+
+    });
+
+  </script>
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <ul>
+
+      <li>About</li>
+
+      <li>Projects</li>
+
+      <li>Home</li>
+
+    </ul>
+
+  </nav>
+
+<div class="content" id="About">
+
+  <h2 style="color: #333;">About </h2>
+
+  <p style="color: #555;">Witaj! Mam na imię Kashumy i mam 14 lat. Oprócz mojej pasji do programowania, jestem również artystą i muzykiem.</p>
+
+  <p style="color: #555;">Tworzę własne utwory muzyczne, które możesz znaleźć na moim kanale YouTube:</p>
+
+  <pre style="white-space: pre-wrap;">
+
+    <a href="https://m.youtube.com/@Nexaturion" style="color: #007bff; text-decoration: none;">Nexaturion</a>
+
+  </pre>
+
+  <p style="color: #555;">Moje kompozycje obejmują różne gatunki muzyczne i eksperymentuję z dźwiękami, aby stworzyć unikalne utwory.</p>
+
+  <p style="color: #555;">Jestem również otwarty na współpracę muzyczną i twórcze projekty artystyczne.</p>
+
+</div>
+
+  <div class="content">
+
+    <h2>Projects</h2>
+
+<pre style="white-space: pre-wrap;">
+
+Projekty znajdują sie na stronie :
+
+   <a href="https://kashumy.github.io" style="color: #007bff; text-decoration: none;">kashumy.github.io</a>
+
+Znajdziesz tam moje muzyki i ewnetualnie czasami 
+
+będzie otwarta stona z moimi obrazami które ja maluje.
+
+</pre>
+
+  </div>
+
+<div class="content" id="home">
+
+  <h2 style="color: #333;">Home</h2>
+
+  <p style="color: #555;">Witaj! Jestem Kashumy, pasjonat programowania i tworzenia stron internetowych.</p>
+
+  <p style="color: #555;">Zapraszam do odwiedzenia moich stron:</p>
+
+  <pre style="white-space: pre-wrap;">
+
+    <a href="https://kashumy.github.io" style="color: #007bff; text-decoration: none;">kashumy.github.io</a>
+
+  </pre>
+
+  <p style="color: #555;">Aktualnie pracuję nad rozbudową tych stron, a moje ulubione technologie to:</p>
+
+  <ul style="color: #555;">
+
+    <li>C++</li>
+
+    <li>HTML</li>
+
+    <li>JavaScript</li>
+
+    <li>CSS</li>
+
+  </ul>
+
+  <p style="color: #555;">Jestem osobą pomocną i posiadam szeroką wiedzę z zakresu programowania i projektowania. Z przyjemnością udzielam pomocy innym użytkownikom.</p>
+
+</div>
+
+</body>
+
+</html>
