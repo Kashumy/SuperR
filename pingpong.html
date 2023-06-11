@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html class="n">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+<head>
+
+    <title>Ping Pong</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            font-family :"Courier New",monospace ;
+
+        }
+
+        #pong {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100vh;
+
+            background-color: black;
+
+            overflow: hidden;
+
+        }
+
+        .ball {
+
+        	position: absolute;
+
+        	width: 5px;
+
+        	height: 5px;
+
+        	background-color: lime;
+
+        }
+
+        .paddle {
+
+            position: absolute;
+
+            width: 5px;
+
+            height: calc( 10vh + 10px );
+
+            background-color: lime;
+
+        }
+
+        #paddle-left {
+
+            left: 10px;
+
+        }
+
+        #paddle-right {
+
+            right: 10px;
+
+        }
+
+        #ball {
+
+            position: absolute;
+
+            width: 5px;
+
+            height: 5px;
+
+            background-color: lime;
+
+        }
+
+body{
+
+	position :fixed ;
+
+	width :100vw;
+
+	height :100vh;
+
+}
+
+        #scoreboard {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 80%;
+
+            color: lime;
+
+        }
+
+        #game-over {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            font-size: 199%;
+
+            color: lime ;
+
+            display: none;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+	     <div onclick="document.querySelector('#zui').style.display='none'; start()" id="zui" style="margin-left: 10vw;margin-top:10vh; color:lime ; position:absolute;z-index:8; top:0;left:0;height:80vh;width:80vw;background :rgba(20,30,20,1) ;color:rgba(0,200,0,1); justify-content:center ; font-size:94%; " ><div style="padding: 2vh;color:lime ;background :rgba(50,100,50,1) ;" >Start Game </div>
+
+	     <pre style="white-space:pre-wrap ">
+
+	     	
+
+	    click  to 	Start
+
+	     	
+
+	     	</p>
+
+	     	
+
+	     	</div>
+
+    <div id="pong">
+
+        <div id="scoreboard">Score: 0</div>
+
+        <div id="paddle-left" class="paddle"></div>
+
+        <div id="paddle-right" class="paddle"></div>
+
+        <div id="ball"></div>
+
+        <div id="game-over" onclick="restart()" >Game Over</div>
+
+    </div>
+
+    <script>
+
+    function restart(){
+
+    	score=0;
+
+    	ballX = 50;
+
+    	ballY = 10;
+
+    	gameRunning = true;
+
+    	
+
+    	
+
+    	ballSpeedY *= -1;
+
+    	ballSpeedX = Widtt.width/ 140;
+
+    	gameOver.style.display="none"
+
+    	update()
+
+    }
+
+        const pong = document.getElementById('pong');
+
+        const paddleLeft = document.getElementById('paddle-left');
+
+        const paddleRight = document.getElementById('paddle-right');
+
+        const ball = document.getElementById('ball');
+
+        const scoreboard = document.getElementById('scoreboard');
+
+        const gameOver = document.getElementById('game-over');
+
+const Widtt = (  document.querySelector('.n').getBoundingClientRect() )
+
+console.log(Widtt.width)
+
+        let ballX = 50;
+
+        let ballY = 10;
+
+        let ballSpeedX = Widtt.width / 140;
+
+        let ballSpeedY = 2;
+
+        let gameRunning = false ;
+
+        let score = 0;
+
+        function updatePaddlePosition(event) {
+
+            const rect = pong.getBoundingClientRect();
+
+            const touchY = event.touches ? event.touches[0].clientY : event.clientY;
+
+            const paddleY = touchY - rect.top - paddleLeft.offsetHeight / 2;
+
+            paddleLeft.style.top = paddleY + 'px';
+
+            paddleRight.style.top = paddleY + 'px';
+
+        }
+
+function start(){
+
+//document.documentElement.requestFullscreen()
+
+gameRunning = true ;
+
+update()
+
+ballSpeedY *= -1;
+
+}
+
+        pong.addEventListener('mousemove', updatePaddlePosition);
+
+        pong.addEventListener('touchmove', updatePaddlePosition);
+
+        function update() {
+
+            if (!gameRunning) {
+
+                return;
+
+            }
+
+            ballX += ballSpeedX;
+
+            ballY += ballSpeedY;
+
+            if (ballY > pong.offsetHeight - ball.offsetHeight || ballY < 0) {
+
+                ballSpeedY *= -1;
+
+            }
+
+            if (ballX > pong.offsetWidth - ball.offsetWidth) {
+
+                
+
+                gameOver.textContent = 'Game Over';
+
+                gameOver.style.display = 'block';
+
+                ballSpeedX *= -1;
+
+                gameRunning = false ;
+
+            } else if (ballX < 0) {
+
+                gameOver.textContent = 'Game Over';
+
+                
+
+                gameOver.style.display = 'block';
+
+                gameRunning = false;
+
+            }
+
+            if (
+
+                ballX <= paddleLeft.offsetWidth &&
+
+                ballY + ball.offsetHeight >= paddleLeft.offsetTop &&
+
+                ballY <= paddleLeft.offsetTop + paddleLeft.offsetHeight
+
+            ) {
+
+            	score++;
+
+                ballSpeedX *= -1;
+
+                if (Math.floor(Math.random() * 2) == 1) {
+
+                	ballSpeedY *= -1;
+
+                } else {
+
+                	ballSpeedY *= 1;
+
+                }
+
+            }
+
+            if (
+
+                ballX + ball.offsetWidth >= pong.offsetWidth - paddleRight.offsetWidth &&
+
+                ballY + ball.offsetHeight >= paddleRight.offsetTop &&
+
+                ballY <= paddleRight.offsetTop + paddleRight.offsetHeight
+
+            ) {
+
+            	score++;
+
+                ballSpeedX *= -1;
+
+                if (Math.floor(Math.random() * 8) == 3) {
+
+                	ballSpeedY *= -1;
+
+                } else {
+
+                	ballSpeedY *= 1;
+
+                }
+
+            }
+
+            ball.style.left = ballX + 'px';
+
+            ball.style.top = ballY + 'px';
+
+            scoreboard.textContent = 'Score: ' + score;
+
+            
+
+        }
+
+        update();
+
+        // Pełny ekran
+
+        function toggleFullScreen() {
+
+          /*  if (!document.fullscreenElement) {
+
+                pong.requestFullscreen().catch(err => {
+
+                    alert(`Błąd podczas próby przejścia w tryb pełnoekranowy: ${err.message}`);
+
+                });
+
+            } else {
+
+                document.exitFullscreen();
+
+            }*/
+
+        }
+
+        document.addEventListener('keydown', event => {
+
+            if (event.key === 'f') {
+
+                toggleFullScreen();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+<script>
+
+function create(){
+
+	var clone = document.createElement("div"); // tworzenie nowego elementu div
+
+	
+
+	clone.className = "ball"; // dodanie klasy CSS
+
+	clone.style.left = ballX +"px"
+
+	clone.style.top = ballY+"px"
+
+	clone.timeform =0;
+
+	clone.opacityy =1;
+
+	
+
+	clone.Timeout = function() {
+
+		this.timeform += 1;
+
+		this.opacityy -= 0.05;
+
+		this.style.opacity= this.opacityy;
+
+		if (this.timeform > 10) {
+
+			this.remove()
+
+			console.log("ok")
+
+		}
+
+	}
+
+	
+
+	document.body.appendChild(clone);
+
+}
+
+setTimeout(loop,200)
+
+      function anim() {
+
+        var particles = document.getElementsByClassName("ball");
+
+        for (var i = 0; i < particles.length; i++) {
+
+          
+
+          particles[i].Timeout()
+
+        }
+
+      }
+
+function loop(){
+
+      requestAnimationFrame(anim)
+
+      requestAnimationFrame(loop)
+
+      requestAnimationFrame(update);
+
+} 
+
+noloag()
+
+function noloag(){
+
+	create()
+
+	setTimeout(noloag,200)
+
+}
+
+</script>
